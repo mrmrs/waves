@@ -141,7 +141,7 @@ var sample_data = WAV_DATA.samples;
               .duration(1000)
               .attr("r", function(d,i) { return i * d;})
               .style("fill", function(d,i) { 
-                return i * d * d * d;
+                return i * d * d * i;
               });
   }
 
