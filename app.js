@@ -137,8 +137,8 @@ var sample_data = WAV_DATA.samples;
       svgContainer.selectAll("circle")
               .data( sample_data.slice(i,i+2))
               .transition()
-              .delay(100*i)
-              .duration(100)
+              .delay(10*i)
+              .duration(10)
              // .attr("cx", function(d,i) { return (i * d) * 10;})
              // .attr("cy", function(d,i) { return i;})
               .attr("r", function(d,i) { return i * d * 3;});
