@@ -128,22 +128,19 @@ var sample_data = WAV_DATA.samples;
                .data(sample_data.slice(0,2))
                .enter()
                .append("circle")
-               .attr("cx", function(d,i) { return 400;})
-               .attr("cy", function(d,i) { return 400;})
+               .attr("cx", function(d,i) { return 200;})
+               .attr("cy", function(d,i) { return 200;})
                .attr("r", function(d,i) { return 30;});
-
 
  for (var i=0; i<sample_data.length;i++) {
       svgContainer.selectAll("circle")
               .data( sample_data.slice(i,i+2))
               .transition()
-              .delay(10*i)
-              .duration(10)
-             // .attr("cx", function(d,i) { return (i * d) * 10;})
-             // .attr("cy", function(d,i) { return i;})
-              .attr("r", function(d,i) { return i * d * 3;});
+              .delay(100*i)
+              .duration(100)
+              .attr("r", function(d,i) { return i * d;})
+              .style("fill", function(d,i) { return i * d * 2;});
   }
-
 
 //  var circles = svgContainer.selectAll("circle")
 //                            .data(WAV_DATA.samples)
