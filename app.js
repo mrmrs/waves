@@ -130,16 +130,19 @@ var sample_data = WAV_DATA.samples;
                .append("circle")
                .attr("cx", function(d,i) { return 200;})
                .attr("cy", function(d,i) { return 200;})
-               .attr("r", function(d,i) { return 30;});
+               .attr("r", function(d,i) { return 30;})
+               .style("fill", "#ff33cc");
 
  for (var i=0; i<sample_data.length;i++) {
       svgContainer.selectAll("circle")
               .data( sample_data.slice(i,i+2))
               .transition()
-              .delay(100*i)
-              .duration(100)
+              .delay(1000*i)
+              .duration(1000)
               .attr("r", function(d,i) { return i * d;})
-              .style("fill", function(d,i) { return i * d * 2;});
+              .style("fill", function(d,i) { 
+                return i * d * d * d;
+              });
   }
 
 //  var circles = svgContainer.selectAll("circle")
