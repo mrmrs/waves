@@ -30,7 +30,7 @@ $(document).ready(function(){
                 });
     }
 
-var n = 20,
+var n = 4,
     random = d3.random.normal(0, .2),
     data = d3.range(n).map(random);
 console.log(sample_data);
