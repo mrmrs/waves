@@ -12,7 +12,7 @@ $(document).ready(function(){
                  .attr("x", function(d,i) { return 0;})
                  .attr("y", function(d,i) { return 0;})
                  .attr("width", function(d,i) { return d;})
-                 .attr("height", function(d,i) { return 1600;})
+                 .attr("height", function(d,i) { return 400;})
                  .style("fill", function(d,i) { return x(d);});
 
    for (var i=0; i<sample_data.length;i++) {
@@ -24,7 +24,7 @@ $(document).ready(function(){
                 .attr("x", function(d,i) { return (d * i);})
                 .attr("y", function(d,i) { return 0;})
                 .attr("width", function(d,i) { return d + 2;})
-                .attr("height", function(d,i) { return 1600;})
+                .attr("height", function(d,i) { return 400;})
                 .style("fill", function(d,i) { 
                   return x(d);
                 });
@@ -36,7 +36,7 @@ var n = 6,
  
 var margin = {top: 20, right: 20, bottom: 20, left: 40},
     width = 1800;
-    height = 900;
+    height = 300;
  
 var x = d3.scale.linear()
     .domain([0, n - 1])
@@ -81,6 +81,7 @@ function tick() {
     .transition()
       .duration(900)
       .attr("d", line)
+      .attr("stroke-width", function(d,i){ return d * i; })
       .ease("linear")
       //.attr("transform", "translate(" + x(0) + ",0)")
       .each("end", tick);
