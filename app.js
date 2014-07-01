@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  d3.json("no-love.json", function(error, json) {
+  d3.json("../no-love.json", function(error, json) {
     if (error) return console.warn(error);
     var sample_data = json.samples;
     var svgContainer = d3.select("svg#container")
