@@ -1,8 +1,9 @@
-{
+$(document).ready(function(){
+var WAV_DATA = {
   "width":1800,
   "height":140,
   "samples": [
-    124,96,87,85,86,104,97,71,95,70,103,103,65,96,63,98,
+    124,96,87,85,86,104,97,71, 95,70,103,103,65,96,63,98,
     104,85,89,79,89,122,100,80, 91,77,104,101,67,96,64,101,
     104,77,93,73,94,103,90,82, 87,82,121,106,74,96,66,106,
     104,69,97,62,97,103,86,87, 82,88,107,94,73,93,74,117,
@@ -116,3 +117,40 @@
     87,86,84,69,57,42,30,25, 18,14,12,9,8,8,8,8,
     8,8,8,8,8,8,8,8] 
 }
+
+  var svgContainer = d3.select("svg");
+
+var sample_data = WAV_DATA.samples;
+
+  svgContainer.selectAll("circle")
+               .data(sample_data.slice(0,2))
+               .enter()
+               .append("circle")
+               .attr("cx", function(d,i) { return 140;})
+               .attr("cy", function(d,i) { return 140;})
+               .attr("r", function(d,i) { return 30;})
+               .style("fill", "#ff33cc");
+
+ for (var i=0; i<sample_data.length;i++) {
+      svgContainer.selectAll("circle")
+              .data( sample_data.slice(i,i+2))
+              .transition()
+              .delay(200*i)
+              .duration(200)
+              .attr("r", function(d,i) { return i * d;})
+              .style("fill", function(d,i) { 
+                return d * d;
+              });
+  }
+
+//  var circles = svgContainer.selectAll("circle")
+//                            .data(WAV_DATA.samples)
+//                            .enter()
+//                            .append("circle");
+//
+//  var circleAttributes = circles.transition()
+//                          .attr("cx", function(d,i) { return (i * d) / 10;})
+//                          .attr("cy", function(d,i) { return d;})
+//                          .attr("r", function(d,i) { return d / 30;})
+//                          .style("fill", "red");
+});

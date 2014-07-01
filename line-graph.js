@@ -3,41 +3,13 @@ $(document).ready(function(){
     if (error) return console.warn(error);
     var sample_data = json.samples;
     var svgContainer = d3.select("svg#container")
-    var x=d3.scale.linear().domain([d3.min(sample_data),d3.max(sample_data)]).range(["#000000","#ffffff"]);
-
-    svgContainer.selectAll("rect")
-                 .data(sample_data.slice(2,140))
-                 .enter()
-                 .append("rect")
-                 .attr("x", function(d,i) { return 0;})
-                 .attr("y", function(d,i) { return 0;})
-                 .attr("width", function(d,i) { return d;})
-                 .attr("height", function(d,i) { return 1600;})
-                 .style("fill", function(d,i) { return x(d);});
-
-   for (var i=0; i<sample_data.length;i++) {
-        svgContainer.selectAll("rect")
-                .data(sample_data)
-                .transition()
-                .duration(60000)
-                .delay(60000*i)
-                .attr("x", function(d,i) { return (d * i);})
-                .attr("y", function(d,i) { return 0;})
-                .attr("width", function(d,i) { return d + 2;})
-                .attr("height", function(d,i) { return 1600;})
-                .style("fill", function(d,i) { 
-                  return x(d);
-                });
-    }
-
 var n = 40,
     random = d3.random.normal(0, .2),
     data = d3.range(n).map(random);
-console.log(sample_data);
  
 var margin = {top: 20, right: 20, bottom: 20, left: 40},
-    width = 1800;
-    height = 600;
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
  
 var x = d3.scale.linear()
     .domain([0, n - 1])
@@ -52,9 +24,10 @@ var line = d3.svg.line()
     .y(function(d, i) { return y(d); });
  
 var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height)
-  .append("g");
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
  
 svg.append("defs").append("clipPath")
     .attr("id", "clip")
@@ -79,17 +52,44 @@ function tick() {
  
   // redraw the line, and slide it to the left
   path
-    .transition()
-      .duration(1000)
       .attr("d", line)
+      .attr("transform", null)
+    .transition()
+      .duration(500)
       .ease("linear")
-      //.attr("transform", "translate(" + x(0) + ","+y(-1)+")")
+      .attr("d", line)
       .each("end", tick);
  
   // pop the old data point off the front
   data.shift();
  
 }
+   // var x=d3.scale.linear().domain([d3.min(sample_data),d3.max(sample_data)]).range(["#000000","#ffffff"]);
+
+   // svgContainer.selectAll("rect")
+   //              .data(sample_data.slice(2,240))
+   //              .enter()
+   //              .append("rect")
+   //              .attr("x", function(d,i) { return 500;})
+   //              .attr("y", function(d,i) { return 500;})
+   //              .attr("width", function(d,i) { return d * d;})
+   //              .attr("height", function(d,i) { return i * i;})
+   //              .style("fill", function(d,i) { return x(d);});
+
+   //for (var i=0; i<sample_data.length;i++) {
+   //     svgContainer.selectAll("rect")
+   //             .data(sample_data)
+   //             .transition()
+   //             .duration(40000)
+   //             .delay(40000*i)
+   //             .attr("x", function(d,i) { return i;})
+   //             .attr("y", function(d,i) { return i;})
+   //             .attr("width", function(d,i) { return i * d;})
+   //             .attr("height", function(d,i) { return i * 5;})
+   //             .style("fill", function(d,i) { 
+   //               return   x(d);
+   //             });
+   // }
 
   });
 
