@@ -30,10 +30,9 @@ $(document).ready(function(){
                 });
     }
 
-var n = 20,
+var n = 6,
     random = d3.random.normal(0, .2),
     data = d3.range(n).map(random);
-console.log(sample_data);
  
 var margin = {top: 20, right: 20, bottom: 20, left: 40},
     width = 1800;
@@ -83,7 +82,7 @@ function tick() {
       .duration(900)
       .attr("d", line)
       .ease("linear")
-      .attr("transform", "translate(" + x(0) + ",0)")
+      //.attr("transform", "translate(" + x(0) + ",0)")
       .each("end", tick);
  
   // pop the old data point off the front
