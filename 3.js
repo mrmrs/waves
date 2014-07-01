@@ -1,42 +1,45 @@
 $(document).ready(function(){
-  d3.json("no-love.json", function(error, json) {
+  d3.json("../jxnblk-tall-girls.json", function(error, json) {
     if (error) return console.warn(error);
     var sample_data = json.samples;
     var svgContainer = d3.select("svg#container")
-    var x=d3.scale.linear().domain([d3.min(sample_data),d3.max(sample_data)]).range(["#000000","#ffffff"]);
+    svgContainer.attr("width", window.innerWidth + 200).attr("fill", "#000");
+    var x=d3.scale.linear().domain([d3.min(sample_data),d3.max(sample_data)]).range(["#ff33cc","#000", "red"]);
 
     svgContainer.selectAll("rect")
-                 .data(sample_data.slice(2,140))
+                 .data(sample_data.slice(2,240))
                  .enter()
                  .append("rect")
-                 .attr("x", function(d,i) { return 0;})
-                 .attr("y", function(d,i) { return 0;})
-                 .attr("width", function(d,i) { return d;})
-                 .attr("height", function(d,i) { return 400;})
+                 .attr("x", 0)
+                 .attr("y", 0)
+                 .attr("width", 0)
+                 .attr("height", 0)
                  .style("fill", function(d,i) { return x(d);});
 
    for (var i=0; i<sample_data.length;i++) {
         svgContainer.selectAll("rect")
                 .data(sample_data)
                 .transition()
-                .duration(60000)
-                .delay(60000*i)
-                .attr("x", function(d,i) { return (d * i);})
+                .duration(20000)
+                .delay(20000*i)
+                .attr("x", function(d,i) { return d * i;})
                 .attr("y", function(d,i) { return 0;})
-                .attr("width", function(d,i) { return d + 2;})
-                .attr("height", function(d,i) { return 400;})
+                .attr("width", function(d,i) { return d * d;})
+                .attr("height", function(d,i) { return window.innerHeight;})
+                .attr("stroke-width", function(d,i) { return d;})
+                .attr("stroke", function(d,i) { return d * d * d;})
                 .style("fill", function(d,i) { 
                   return x(d);
                 });
     }
 
-var n = 6,
-    random = d3.random.normal(0, .2),
+var n = 24,
+    random = d3.random.normal(1, 1.2),
     data = d3.range(n).map(random);
  
 var margin = {top: 20, right: 20, bottom: 20, left: 40},
-    width = 2560;
-    height = 300;
+    width = window.innerWidth + 200;
+    height = window.innerHeight;
  
 var x = d3.scale.linear()
     .domain([0, n - 1])
@@ -53,21 +56,23 @@ var line = d3.svg.line()
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height)
-  .append("g");
+    .attr("y", 0)
+    .append("g");
  
 svg.append("defs").append("clipPath")
     .attr("id", "clip")
-  .append("rect")
+    .append("rect")
     .attr("width", width)
     .attr("height", height);
  
  
 var path = svg.append("g")
     .attr("clip-path", "url(#clip)")
-  .append("path")
+    .append("path")
     .datum(data)
     .attr("class", "line")
     .attr("d", line);
+
  
 tick();
  
@@ -79,11 +84,11 @@ function tick() {
   // redraw the line, and slide it to the left
   path
     .transition()
-      .duration(900)
+      .duration(2000)
       .attr("d", line)
-      .attr("stroke-width", function(d,i){ return d * i; })
-      .ease("linear")
-      //.attr("transform", "translate(" + x(0) + ",0)")
+      .ease("elastic")
+      .attr("transform", "translate(" + x(0) + ",0)")
+      .style("stroke-width", function(d,i) {return d * i})
       .each("end", tick);
  
   // pop the old data point off the front
