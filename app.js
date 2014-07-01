@@ -37,7 +37,7 @@ console.log(sample_data);
  
 var margin = {top: 20, right: 20, bottom: 20, left: 40},
     width = 1800;
-    height = 600;
+    height = 1200;
  
 var x = d3.scale.linear()
     .domain([0, n - 1])
@@ -80,7 +80,7 @@ function tick() {
   // redraw the line, and slide it to the left
   path
     .transition()
-      .duration(1000)
+      .duration(2000)
       .attr("d", line)
       .ease("linear")
       //.attr("transform", "translate(" + x(0) + ","+y(-1)+")")

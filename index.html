@@ -11,9 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/i.css">
     <style>
+      body { overflow: hidden; }
       svg { position: absolute; top 0; left: -20px;}
       html, body { height: 100%; width: 100%; }
-      svg#container { width: 100%; height: 1600px;}
+      svg#container { width: 100%; height: 100%; }
       svg {
         font: 10px sans-serif;
       }
@@ -21,22 +22,24 @@
 .line {
   fill: none;
   stroke: #fff;
-  stroke-width: 2px;
+  stroke-width: 180px;
 }
  
 .axis path,
 .axis line {
   fill: none;
   stroke: #fff;
-  shape-rendering: crispEdges;
+  //shape-rendering: crispEdges;
 }
     </style>
   </head>
   <body>
     <svg id="container" >
     </svg>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <header style="position: absolute; top: 0;">
+      <h1 style="color: white; text-align: center; padding-left: 10px; font-weight: 100; font-size: 12px; text-transform: uppercase; letter-spacing: .13em;">Waves</h1>
+    </header>
+    <script src="base.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
