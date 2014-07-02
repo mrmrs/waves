@@ -1,76 +1,11 @@
-# MNML
+# WAVES
 
 ## What is this?
 
-View the project page at [http://mn-ml.cc](http://mn-ml.cc "MNML - A light-weight responsive html5 boilerplate.")
+Experiments in data visualization using d3.js and waveform data from various curated sound files.
 
-MNML is a starting point for prototyping responsive HTML5 SASS projects.
-Uses gulp to create a dev environment for rapidly prototyping sites. 
-
-## Features
-
-* sass compilation
-* css minification
-* css linting
-* autoprefixer (automatically adds appropriate vendor prefixes) 
-* browser reload on filesave
-* local server for serving a static site
-
-## Getting started
-
-* Create a new repo for your project on Github
-* In terminal run
-```bash
-    git clone git@github.com:mrmrs/mnml.git yourNewRepoName
-    cd yourNewRepoName
-    rm -rf .git
-    git init
-    git remote add origin git@github.com:yourUserName/yourNewRepoName.git
-```
-
-* git remote -v will allow you to check that you have changed the remote origin correctly. The output should look like:
-```bash
-    origin git@github.com:yourUserName/yourNewRepoName.git (fetch)
-    origin git@github.com:yourUserName/yourNewRepoName.git (push)
-```
-
-## Dev environment
-To set up a convenient dev environment run this at the root of mnml
-
-```bash
-npm install -g gulp browser-sync && npm install .
-```
-
-Then run
-
-```
-gulp
-```
-
-Gulp is a javascript task runner. It compiles sass, lints the compiled css, and sets up a livereload server so you can save your fingers from pressing ⌘+r
-
-* Once you add & commit files you are ready to publish run:
-```bash
-git push -u origin master
-```
-
-## Directory structure
-```
-    mnml/
-        ├── README.md
-        ├── gulpfile.js
-        ├── package.json
-        ├── index.html                (386 bytes)
-        ├── css
-        │   └── i.css                 (2 kb minified - 1.2kb gzipped)
-        └── sass                      CSS source
-            ├── _normalize.scss
-            ├── _variables.scss
-            ├── _grid.scss
-            ├── _type.scss
-            ├── _styles.scss
-            └── i.scss
-```
+View the project page at [http://mrmrs.io/waves](htt://mrmrs.io/waves "Waves. Data visualizations for the super bored.")
+ 
 
 # Author
 
