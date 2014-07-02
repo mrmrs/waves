@@ -1,44 +1,41 @@
 $(document).ready(function(){
-  d3.json("../jxnblk-tall-girls.json", function(error, json) {
+  d3.json("data.json", function(error, json) {
     if (error) return console.warn(error);
     var sample_data = json.samples;
     var svgContainer = d3.select("svg#container")
     svgContainer.attr("width", window.innerWidth + 200).attr("fill", "#000");
-    var x=d3.scale.linear().domain([d3.min(sample_data),d3.max(sample_data)]).range(["#ff33cc","#000", "red"]);
+    var x=d3.scale.linear().domain([d3.min(sample_data),d3.max(sample_data)]).range(["orange","white"]);
 
     svgContainer.selectAll("rect")
-                 .data(sample_data.slice(2,240))
+                 .data(sample_data.slice(100,120))
                  .enter()
                  .append("rect")
                  .attr("x", 0)
                  .attr("y", 0)
-                 .attr("width", 0)
-                 .attr("height", 0)
+                 .attr("width", window.innerWidth)
+                 .attr("height", window.innerHeight)
                  .style("fill", function(d,i) { return x(d);});
 
    for (var i=0; i<sample_data.length;i++) {
         svgContainer.selectAll("rect")
                 .data(sample_data)
                 .transition()
-                .duration(20000)
-                .delay(20000*i)
-                .attr("x", function(d,i) { return d * i;})
+                .duration(10000)
+                .delay(10000*i)
+                .attr("x", function(d,i) { return i * 100;})
                 .attr("y", function(d,i) { return 0;})
-                .attr("width", function(d,i) { return d * d;})
+                .attr("width", function(d,i) { return d * i;})
                 .attr("height", function(d,i) { return window.innerHeight;})
-                .attr("stroke-width", function(d,i) { return d;})
-                .attr("stroke", function(d,i) { return d * d * d;})
                 .style("fill", function(d,i) { 
                   return x(d);
                 });
     }
 
-var n = 24,
-    random = d3.random.normal(1, 1.2),
+var n = 4,
+    random = d3.random.normal(1, 1.1),
     data = d3.range(n).map(random);
  
-var margin = {top: 20, right: 20, bottom: 20, left: 40},
-    width = window.innerWidth + 200;
+var width = window.innerWidth + 200;
     height = window.innerHeight;
  
 var x = d3.scale.linear()
@@ -47,7 +44,7 @@ var x = d3.scale.linear()
  
 var y = d3.scale.linear()
     .domain([-1, 1])
-    .range([height, 0]);
+    .range([height / 2, 0]);
  
 var line = d3.svg.line()
     .x(function(d, i) { return x(i); })
@@ -84,11 +81,10 @@ function tick() {
   // redraw the line, and slide it to the left
   path
     .transition()
-      .duration(2000)
+      .duration(100000)
       .attr("d", line)
-      .ease("elastic")
-      .attr("transform", "translate(" + x(0) + ",0)")
-      .style("stroke-width", function(d,i) {return d * i})
+      .ease("ease-in-out")
+      .attr("transform", "translate(" + x(-1) + ",0)")
       .each("end", tick);
  
   // pop the old data point off the front
@@ -100,18 +96,6 @@ function tick() {
 
 
 
-  //  var circles = svgContainer.selectAll("circle")
-  //                            .data(WAV_DATA.samples)
-  //                            .enter()
-  //                            .append("circle");
-  //
-  //  var circleAttributes = circles.transition()
-  //                          .attr("cx", function(d,i) { return (i * d) / 10;})
-  //                          .attr("cy", function(d,i) { return d;})
-  //                          .attr("r", function(d,i) { return d / 30;})
-  //                          .style("fill", "red");
-
-  //var sample_data = WAV_DATA.samples;
 
 
 });
