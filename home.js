@@ -35,8 +35,8 @@ var n = 6,
     data = d3.range(n).map(random);
  
 var margin = {top: 20, right: 20, bottom: 20, left: 40},
-    width = 2560;
-    height = 300;
+    width = window.innerWidth;
+    height = window.innerHeight;
  
 var x = d3.scale.linear()
     .domain([0, n - 1])
